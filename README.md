@@ -1,50 +1,90 @@
-# Welcome to your Expo app 👋
+# Mobile Core — Poomsae Tech
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 🚀 Технический стек
 
-## Get started
+- React 19 — библиотека для создания пользовательских интерфейсов  
+- TypeScript — статическая типизация  
+- Expo — фреймворк для кроссплатформенных приложений React Native  
+- Expo Router — маршрутизация внутри приложения  
+- React Navigation — навигация между экранами  
+- ESLint — статический анализ кода  
+- Node.js & npm — окружение для разработки  
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 📁 Структура проекта
 
 ```bash
-npm run reset-project
+app/
+├── components/       # Переиспользуемые компоненты
+├── screens/          # Страницы приложения (создаём новые страницы здесь)
+├── navigation/       # Конфигурация навигации
+├── assets/           # Статические ресурсы: картинки, иконки
+├── hooks/            # Кастомные хуки
+└── utils/            # Утилиты и функции
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🖥️ Команды для разработки
 
-## Learn more
+### Запуск проекта
+```bash
+npx expo start        # dev-сервер
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+> w → открыть в браузере  
+> a → открыть на Android  
+> i → открыть на iOS  
+> QR-код → сканируем через Expo Go  
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Установка новых библиотек
+```bash
+npx expo install <package>
+```
 
-## Join the community
+### Проверка кода
+```bash
+npm run lint
+```
 
-Join our community of developers creating universal apps.
+## ⚙️ Работа с Git и ветками
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Создать ветку для задачи
+```bash
+git checkout -b feature/<название_задачи>
+```
+
+### Пушим ветку на GitHub
+```bash
+git push -u origin feature/<название_задачи>
+```
+
+> После завершения работы создаём Pull Request в main.  
+> ⚠️ Не пушить: node_modules/, .expo/, .expo-shared/, dist/, временные файлы.  
+
+## 📦 Установка проекта для новичка
+
+1. Установить Node.js (v20.20.1)
+```bash
+https://nodejs.org/en/download/archive/v20.20.1/  
+```
+
+2. Установить Git
+```bash
+https://git-scm.com/install/windows
+```
+
+3. Клонировать репозиторий:
+```bash
+git clone https://github.com/poomsae-tech/mobile-core.git
+cd mobile-core
+```
+
+4. Установить зависимости:
+```bash
+npm install
+```
+
+5. Запустить проект:
+```bash
+npx expo start
+```
+
+> ✅ Тестировать через **Expo Go** на телефоне
