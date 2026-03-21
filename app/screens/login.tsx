@@ -53,6 +53,10 @@ export default function LoginScreen() {
     Montserrat_600SemiBold,
   });
 
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const isButtonDisabled = !login.trim() || !password.trim();
+
   const safeFontFamily = getSafeFontFamily(fontsLoaded);
 
   return (
@@ -88,6 +92,8 @@ export default function LoginScreen() {
               style={[styles.inputLogin, { fontFamily: safeFontFamily }]} 
               placeholder="ivanov@mail.ru" 
               placeholderTextColor="#999999"
+              value={login}
+              onChangeText={setLogin}
             />
 
             <Text style={[styles.labelPassword, { fontFamily: safeFontFamily }]}>
@@ -98,14 +104,17 @@ export default function LoginScreen() {
               placeholder="••••••••" 
               secureTextEntry 
               placeholderTextColor="#999999"
+              value={password}
+              onChangeText={setPassword}
             />
 
             <View style={styles.spacer} />
             
             <Pressable 
-              style={styles.button}
+              style={[styles.button, isButtonDisabled && styles.buttonDisabled]}
               android_ripple={{ color: '#1a5f8a' }}
-              onPress={() => console.log('Login pressed')}>
+              onPress={() => console.log('Login pressed')}
+              disabled={isButtonDisabled}>
               <Text style={[styles.buttonText, { fontFamily: safeFontFamily }]}>
                 {"ВОЙТИ"}
               </Text>
@@ -232,6 +241,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 6,
     elevation: 6,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
   },
   buttonText: {
     fontStyle: 'normal',
