@@ -1,5 +1,7 @@
 import { Montserrat_600SemiBold, useFonts } from '@expo-google-fonts/montserrat';
-import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 let LOGO_FEDERATION = null;
@@ -53,17 +55,53 @@ export default function LoginScreen() {
     Montserrat_600SemiBold,
   });
 
+  const router = useRouter();
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isCheckingToken, setIsCheckingToken] = useState(true);
   const isButtonDisabled = !login.trim() || !password.trim();
 
   const safeFontFamily = getSafeFontFamily(fontsLoaded);
 
-  const handleLogin = () => {
+  useEffect(() => {
+    let isMounted = true;
+    const checkToken = async () => {
+      try {
+        const token = await AsyncStorage.getItem('authToken');
+        if (token) {
+          // Сделать в дальнейшем редирект на главный экран судьи (???список поединков???) после успешной проверки токена
+          router.replace('/(tabs)');
+          return;
+        }
+      } catch (tokenError) {
+        console.warn('Failed to read auth token', tokenError);
+      } finally {
+        if (isMounted) {
+          setIsCheckingToken(false);
+        }
+      }
+    };
+
+    checkToken();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [router]);
+
+  const handleLogin = async () => {
     if (login === 'admin' && password === 'admin') {
       setError('');
-      console.log('Login success');
+      try {
+        await AsyncStorage.setItem('authToken', 'mock-token');
+        // Сделать в дальнейшем редирект на главный экран судьи (???список поединков???) после успешной проверки токена
+        router.replace('/(tabs)');
+      } catch (tokenError) {
+        console.warn('Failed to save auth token', tokenError);
+        setError('Failed to save token. Try again.');
+      }
     } else {
       setError('Неверный логин или пароль');
     }
@@ -78,6 +116,10 @@ export default function LoginScreen() {
     setPassword(text);
     if (error) setError('');
   };
+
+  if (isCheckingToken) {
+    return <View style={styles.container} />;
+  }
 
   return (
     <View style={styles.container}>
