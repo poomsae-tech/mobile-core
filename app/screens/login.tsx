@@ -55,9 +55,29 @@ export default function LoginScreen() {
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const isButtonDisabled = !login.trim() || !password.trim();
 
   const safeFontFamily = getSafeFontFamily(fontsLoaded);
+
+  const handleLogin = () => {
+    if (login === 'admin' && password === 'admin') {
+      setError('');
+      console.log('Login success');
+    } else {
+      setError('Неверный логин или пароль');
+    }
+  };
+
+  const handleLoginChange = (text) => {
+    setLogin(text);
+    if (error) setError('');
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    if (error) setError('');
+  };
 
   return (
     <View style={styles.container}>
@@ -93,7 +113,7 @@ export default function LoginScreen() {
               placeholder="ivanov@mail.ru" 
               placeholderTextColor="#999999"
               value={login}
-              onChangeText={setLogin}
+              onChangeText={handleLoginChange}
             />
 
             <Text style={[styles.labelPassword, { fontFamily: safeFontFamily }]}>
@@ -105,20 +125,30 @@ export default function LoginScreen() {
               secureTextEntry 
               placeholderTextColor="#999999"
               value={password}
-              onChangeText={setPassword}
+              onChangeText={handlePasswordChange}
             />
 
             <View style={styles.spacer} />
             
             <Pressable 
-              style={[styles.button, isButtonDisabled && styles.buttonDisabled]}
+              style={({ pressed }) => [
+                styles.button,
+                pressed && styles.buttonPressed,
+                isButtonDisabled && styles.buttonDisabled
+              ]}
               android_ripple={{ color: '#1a5f8a' }}
-              onPress={() => console.log('Login pressed')}
+              onPress={handleLogin}
               disabled={isButtonDisabled}>
               <Text style={[styles.buttonText, { fontFamily: safeFontFamily }]}>
                 {"ВОЙТИ"}
               </Text>
             </Pressable>
+
+            {error ? (
+              <Text style={[styles.errorText, { fontFamily: safeFontFamily }]}>
+                {error}
+              </Text>
+            ) : null}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -242,6 +272,10 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 6,
   },
+  buttonPressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.98 }],
+  },
   buttonDisabled: {
     opacity: 0.6,
   },
@@ -252,5 +286,12 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: '#FFFFFF',
     textAlign: 'center',
+  },
+  errorText: {
+    marginTop: 16,
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#FF6B6B',
+    fontWeight: '600',
   },
 });
