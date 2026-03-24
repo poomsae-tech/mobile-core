@@ -16,7 +16,7 @@ import { ATHLETES } from './data';
 
 export default function SportsmanScreen() {
   const router = useRouter();
-  const params = useLocalSearchParams(); // Получаем все фильтры сразу
+  const params = useLocalSearchParams(); // все фильтры сразу
   
   const [searchText, setSearchText] = useState('');
 
@@ -63,7 +63,7 @@ const filteredAthletes = ATHLETES.filter(athlete => {
       </View>
 
       <View style={styles.searchContainer}>
-        {/* Кнопка фильтров теперь передает текущий поиск, чтобы он не сбросился */}
+        {/* фильтр*/}
         <TouchableOpacity onPress={() => router.push('/filters/FiltersScreen')}>
           <Ionicons name="funnel-outline" size={28} color="#fff" />
         </TouchableOpacity>
@@ -79,7 +79,7 @@ const filteredAthletes = ATHLETES.filter(athlete => {
           />
         </View>
 
-        {/* Кнопка лупы теперь активирует поиск */}
+        {/* лупа*/}
         <TouchableOpacity onPress={() => setActiveSearch(searchText)}>
           <Ionicons name="search-outline" size={28} color="#fff" />
         </TouchableOpacity>
@@ -87,15 +87,23 @@ const filteredAthletes = ATHLETES.filter(athlete => {
 
       <ScrollView contentContainerStyle={styles.listContent}>
         {filteredAthletes.length > 0 ? (
+
           filteredAthletes.map((item) => (
-            <View key={item.id} style={styles.card}>
+            <TouchableOpacity 
+              key={item.id} 
+              style={styles.card}
+              onPress={() => router.push({
+                pathname: '/sportsman-edit/SportsmanEditScreen',
+                params: { id: item.id }
+              })}
+            >
               <Text style={styles.cardName}>{item.name}</Text>
               <View style={styles.cardInfoRow}>
                 <View style={[styles.statusDot, { backgroundColor: item.statusColor }]} />
                 <Text style={styles.cardInfoText}>{item.age} лет, {item.belt}</Text>
               </View>
               <Text style={styles.cardInfoText}>Пол: {item.gender === 'Мужской' ? 'М' : 'Ж'}</Text>
-            </View>
+            </TouchableOpacity>
           ))
         ) : (
           <Text style={{ color: '#fff', textAlign: 'center', marginTop: 20 }}>
@@ -104,7 +112,10 @@ const filteredAthletes = ATHLETES.filter(athlete => {
         )}
       </ScrollView>
 
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity 
+        style={styles.addButton}
+        onPress={() => router.push('/sportsman-edit/SportsmanEditScreen')}
+      >
         <Text style={styles.addButtonText}>Добавить спортсмена</Text>
       </TouchableOpacity>
     </SafeAreaView>
