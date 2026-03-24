@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
@@ -21,6 +21,27 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <Link href="/filters/FiltersScreen" asChild>
+          <TouchableOpacity style={styles.filterButton}>
+            <ThemedText type="defaultSemiBold" style={{ color: '#fff' }}>
+              Открыть фильтры
+            </ThemedText>
+          </TouchableOpacity>
+        </Link>
+      </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <Link href="/sportsman/SportsmanScreen" asChild>
+          <TouchableOpacity style={styles.filterButton}>
+            <ThemedText type="defaultSemiBold" style={{ color: '#fff' }}>
+              Открыть спортсменов
+            </ThemedText>
+          </TouchableOpacity>
+        </Link>
+      </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
@@ -36,6 +57,7 @@ export default function HomeScreen() {
           to open developer tools.
         </ThemedText>
       </ThemedView>
+      
       <ThemedView style={styles.stepContainer}>
         <Link href="/modal">
           <Link.Trigger>
@@ -61,9 +83,10 @@ export default function HomeScreen() {
         </Link>
 
         <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
+          {`Tap the Explore tab to learn more about what's included in this supreme app.`}
         </ThemedText>
       </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
         <ThemedText>
@@ -94,5 +117,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  // Стиль для кнопки фильтров
+  filterButton: {
+    backgroundColor: '#1A6B9B',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 4,
   },
 });
