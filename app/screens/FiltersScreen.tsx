@@ -30,7 +30,7 @@ export default function FiltersScreen() {
 
     const handleApply = () => {
     router.push({
-        pathname: "/screens/SportsmanScreen", 
+        pathname: "/(tabs)/explore", 
         params: { 
         gender: gender || '', 
         belt: belt || '', 

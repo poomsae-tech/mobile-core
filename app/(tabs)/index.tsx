@@ -24,19 +24,6 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
 
-      {/* Кнопка Уведомлений */}
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/screens/NotificationsScreen" asChild>
-          <TouchableOpacity style={styles.notificationButton}>
-            <View style={styles.buttonContent}>
-              <Ionicons name="notifications-outline" size={20} color="#fff" />
-              <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-                Уведомления
-              </ThemedText>
-            </View>
-          </TouchableOpacity>
-        </Link>
-      </ThemedView>
 
       {/* Кнопка Фильтров */}
       <ThemedView style={styles.stepContainer}>
@@ -44,17 +31,6 @@ export default function HomeScreen() {
           <TouchableOpacity style={styles.filterButton}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
               Открыть фильтры
-            </ThemedText>
-          </TouchableOpacity>
-        </Link>
-      </ThemedView>
-
-      {/* Кнопка Спортсменов */}
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/screens/SportsmanScreen" asChild>
-          <TouchableOpacity style={styles.filterButton}>
-            <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              Открыть спортсменов
             </ThemedText>
           </TouchableOpacity>
         </Link>
