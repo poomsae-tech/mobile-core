@@ -26,7 +26,7 @@ export default function HomeScreen() {
 
       {/* Кнопка Уведомлений */}
       <ThemedView style={styles.stepContainer}>
-        <Link href="/notifications/NotificationsScreen" asChild>
+        <Link href="/screens/NotificationsScreen" asChild>
           <TouchableOpacity style={styles.notificationButton}>
             <View style={styles.buttonContent}>
               <Ionicons name="notifications-outline" size={20} color="#fff" />
@@ -40,7 +40,7 @@ export default function HomeScreen() {
 
       {/* Кнопка Фильтров */}
       <ThemedView style={styles.stepContainer}>
-        <Link href="/filters/FiltersScreen" asChild>
+        <Link href="/screens/FiltersScreen" asChild>
           <TouchableOpacity style={styles.filterButton}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
               Открыть фильтры
@@ -51,7 +51,7 @@ export default function HomeScreen() {
 
       {/* Кнопка Спортсменов */}
       <ThemedView style={styles.stepContainer}>
-        <Link href="/sportsman/SportsmanScreen" asChild>
+        <Link href="/screens/SportsmanScreen" asChild>
           <TouchableOpacity style={styles.filterButton}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
               Открыть спортсменов

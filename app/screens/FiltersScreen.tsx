@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { useRouter, Stack } from 'expo-router'; 
+import { Stack, useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 
-import { styles } from './FiltersScreen.styles';
-import { FILTER_DATA } from './data';
+import { StyleSheet } from 'react-native';
 
 export default function FiltersScreen() {
   const router = useRouter();
@@ -31,7 +30,7 @@ export default function FiltersScreen() {
 
     const handleApply = () => {
     router.push({
-        pathname: "/sportsman/SportsmanScreen", 
+        pathname: "/screens/SportsmanScreen", 
         params: { 
         gender: gender || '', 
         belt: belt || '', 
@@ -155,3 +154,127 @@ export default function FiltersScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#022B3E',
+  },
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 40,
+  },
+  topNav: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    marginBottom: 20,
+  },
+  navTitle: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  resetText: {
+    color: '#fff',
+    fontSize: 14,
+    textDecorationLine: 'underline',
+  },
+  section: {
+    backgroundColor: '#084366',
+    borderRadius: 8,
+    marginBottom: 12,
+    overflow: 'hidden',
+    elevation: 3,
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowColor: '#000',
+  },
+  accordionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  sectionContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  },
+  checkboxRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  checkbox: {
+    width: 22,
+    height: 22,
+    borderWidth: 2,
+    borderColor: '#1A6B9B',
+    borderRadius: 4,
+    marginRight: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  checkboxChecked: {
+    backgroundColor: '#1A6B9B',
+  },
+  rowText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  sliderLabel: {
+    color: '#fff',
+    marginBottom: 10,
+  },
+  sliderTrackPlaceholder: {
+    height: 2,
+    backgroundColor: '#fff',
+    marginVertical: 15,
+  },
+  sliderThumb: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    position: 'absolute',
+    top: -7,
+    left: '20%',
+  },
+  sliderRange: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  rangeLimit: {
+    color: '#fff',
+    fontSize: 12,
+  },
+  applyButton: {
+    backgroundColor: '#0E4E75',
+    padding: 16,
+    borderRadius: 30,
+    alignItems: 'center',
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.1)',
+  },
+  applyButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+
+export const FILTER_DATA = {
+  genders: ['Все', 'Женский', 'Мужской'],
+  belts: ['10 гып', '9 гып', '8 гып', '7 гып', '6 гып', '5 гып', '4 гып', '3 гып', '2 гып', '1 гып', '1 дан', '2 дан', '3 дан', '4 дан', '5 дан', '6 дан', '7 дан', '8 дан', '9 дан'],
+  weights: ['до 30 кг', '30-40 кг', '40-50 кг', '50-60 кг', '60-70 кг', 'Более 70 кг']
+};
