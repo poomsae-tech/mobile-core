@@ -1,4 +1,4 @@
-import FinesScreen from './screens/fines_screen';
+import FinesScreen from './screens/tournament_app_screen';
 
 export default function Index() {
   return <FinesScreen />;
