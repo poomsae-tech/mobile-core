@@ -126,7 +126,8 @@ const filteredAthletes = ATHLETES.filter(athlete => {
 export const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: '#053552' 
+    backgroundColor: '#053552',
+    paddingTop: 40,
   },
   header: { 
     flexDirection: 'row', 
