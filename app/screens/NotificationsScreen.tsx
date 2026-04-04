@@ -97,6 +97,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#053552',
+    paddingTop: 40,
   },
   topNav: {
     flexDirection: 'row',
