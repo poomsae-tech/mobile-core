@@ -258,7 +258,8 @@ const SELECTOR_BG = '#CCCCCC'; // СЕРЫЙ фон для селектора П
 export const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: MAIN_BG 
+    backgroundColor: MAIN_BG,
+    paddingTop: 40,
   },
   scrollContent: { 
     padding: 20, 
@@ -269,7 +270,8 @@ export const styles = StyleSheet.create({
   topNav: { 
     flexDirection: 'row', 
     alignItems: 'center', 
-    marginBottom: 20 
+    marginBottom: 20,
+    paddingLeft: 20,
   },
   navTitle: { 
     color: '#fff', 
