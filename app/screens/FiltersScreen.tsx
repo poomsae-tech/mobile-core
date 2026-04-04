@@ -2,9 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { Stack, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
-
-import { StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function FiltersScreen() {
   const router = useRouter();
@@ -58,12 +56,9 @@ export default function FiltersScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* 1. Скрываем системный заголовок */}
       <Stack.Screen options={{ headerShown: false }} />
-      
       <StatusBar barStyle="light-content" />
       
-      {/* кастомный Header */}
       <View style={styles.topNav}>
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back-circle-outline" size={32} color="#fff" />
@@ -75,7 +70,6 @@ export default function FiltersScreen() {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Секция ПОЛ */}
         <View style={styles.section}>
           <TouchableOpacity style={styles.accordionHeader} onPress={() => toggleSection('gender')}>
             <Text style={styles.headerText}>Пол: {gender || 'Все'}</Text>
@@ -88,7 +82,6 @@ export default function FiltersScreen() {
           )}
         </View>
 
-        {/* Секция ВОЗРАСТ */}
         <View style={styles.section}>
           <TouchableOpacity style={styles.accordionHeader} onPress={() => toggleSection('age')}>
             <Text style={styles.headerText}>Возраст: от {ageRange[0]} до {ageRange[1]}</Text>
@@ -119,7 +112,6 @@ export default function FiltersScreen() {
           )}
         </View>
 
-        {/* Секция ПОЯС */}
         <View style={styles.section}>
           <TouchableOpacity style={styles.accordionHeader} onPress={() => toggleSection('belt')}>
             <Text style={styles.headerText}>Пояс: {belt || 'Не выбран'}</Text>
@@ -134,7 +126,6 @@ export default function FiltersScreen() {
           )}
         </View>
 
-        {/* Секция ВЕС */}
         <View style={styles.section}>
           <TouchableOpacity style={styles.accordionHeader} onPress={() => toggleSection('weight')}>
             <Text style={styles.headerText}>Вес: {weight || 'Любой'}</Text>
@@ -159,6 +150,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#022B3E',
+    paddingTop: 40,   // ← ЕДИНСТВЕННОЕ ДОБАВЛЕНИЕ: отступ под панель уведомлений
   },
   scrollContent: {
     padding: 20,
@@ -271,7 +263,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
 
 export const FILTER_DATA = {
   genders: ['Все', 'Женский', 'Мужской'],
