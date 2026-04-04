@@ -1,5 +1,5 @@
-import FinesScreen from './screens/fines_screen';
+/*import LoginScreen from '@/app/screens/login';
 
 export default function Index() {
-  return <FinesScreen />;
-}
+  return <LoginScreen />;
+} */
