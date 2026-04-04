@@ -1,6 +1,6 @@
 import { Montserrat_600SemiBold, useFonts } from '@expo-google-fonts/montserrat';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 import { useEffect, useState } from 'react';
 import { Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
@@ -8,6 +8,23 @@ let LOGO_FEDERATION = null;
 
 try { LOGO_FEDERATION = require('../../assets/images/react-logo.png'); } // заменить на реальный путь к логотипу федерации
 catch (error) { LOGO_FEDERATION = null; }
+
+const SecureStorage = {
+  setItem: async (key: string, value: string): Promise<void> => {
+    if (Platform.OS === 'web') {
+      localStorage.setItem(key, value);
+    } else {
+      await SecureStore.setItemAsync(key, value);
+    }
+  },
+  getItem: async (key: string): Promise<string | null> => {
+    if (Platform.OS === 'web') {
+      return localStorage.getItem(key);
+    } else {
+      return await SecureStore.getItemAsync(key);
+    }
+  }
+};
 
 const getSafeFontFamily = (fontsLoaded) => {
   return fontsLoaded ? 'Montserrat_600SemiBold' : Platform.select({
@@ -69,9 +86,8 @@ export default function LoginScreen() {
     let isMounted = true;
     const checkToken = async () => {
       try {
-        const token = await AsyncStorage.getItem('authToken');
+        const token = await SecureStorage.getItem('authToken');
         if (token) {
-          // Сделать в дальнейшем редирект на главный экран судьи (???список поединков???) после успешной проверки токена
           router.replace('/(tabs)');
           return;
         }
@@ -95,8 +111,7 @@ export default function LoginScreen() {
     if (login === 'admin' && password === 'admin') {
       setError('');
       try {
-        await AsyncStorage.setItem('authToken', 'mock-token');
-        // Сделать в дальнейшем редирект на главный экран судьи (???список поединков???) после успешной проверки токена
+        await SecureStorage.setItem('authToken', 'mock-token');
         router.replace('/(tabs)');
       } catch (tokenError) {
         console.warn('Failed to save auth token', tokenError);
